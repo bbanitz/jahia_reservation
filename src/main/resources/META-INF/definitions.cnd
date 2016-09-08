@@ -1,7 +1,8 @@
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
 <jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 
 [jnt:userRegistration] > jnt:content, jmix:formContent
- - toAdministrator (boolean)=false autocreated indexed=no
+ - toAdministrator (boolean) = 'false' autocreated indexed=no
  - from (string) indexed=no
  - to (string) indexed=no
  - cc (string) indexed=no
@@ -9,6 +10,18 @@
  - userRedirectPage (weakreference) mandatory indexed=no
 
 [jnt:askForPasswordRecovery] > jnt:content, jmix:formContent
- - passChangePage (weakreference) mandatory < jnt:page
+ - passChangePage (weakreference) mandatory < 'jnt:page'
 
 [jnt:passwordRecoveryForm] > jnt:content, jmix:formContent
+
+[jnt:uneReservation] > jnt:content, jmix:formContent
+ - nom (string) mandatory
+ - prenom (string) mandatory
+ - adresse (string) mandatory
+ - codePostal (string) mandatory
+ - ville (string) mandatory
+ - email (string) mandatory
+ - telephone (string)
+ - modeReglement (string)
+ - paye (boolean, text)
+
