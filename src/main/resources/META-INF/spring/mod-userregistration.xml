@@ -14,7 +14,7 @@
     </bean>
     <bean class="org.jahia.modules.userregistration.actions.NewReservation" parent="baseUserregistrationAction">
         <property name="name" value="newReservation"/>
-        <property name="templatePath" value="${userregistrationUserRegisteredTemplatePath:/mails/templates/userhasregistered.vm}"/>
+        <property name="templatePath" value="${userregistrationUserRegisteredTemplatePath:/mails/templates/newReservation.vm}"/>
     </bean>
 
     <bean class="org.jahia.modules.userregistration.actions.RecoverPassword" parent="baseUserregistrationAction">

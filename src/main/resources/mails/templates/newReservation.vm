@@ -1,0 +1,10 @@
+#* @vtlvariable name="newUser" type="org.jahia.services.usermanager.JahiaUser" *#
+#* @vtlvariable name="bundle" type="java.util.ResourceBundle" *#
+#* @vtlvariable name="reservation" type="org.jahia.services.content.JCRNodeWrapper" *#
+<html>
+<body>
+<h1>
+    ${bundle.getString("user.has.registered")} ${reservation.prenom")} ${reservation.nom")}</h1>
+<p>${reservation.adresse}</p>
+</body>
+</html>

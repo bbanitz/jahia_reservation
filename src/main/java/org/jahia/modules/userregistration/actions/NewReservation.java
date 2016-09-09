@@ -56,6 +56,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.jahia.bin.ActionResult;
 import org.jahia.services.content.JCRCallback;
+import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.JCRSessionWrapper;
 import org.jahia.services.content.JCRTemplate;
 import org.jahia.services.content.decorator.JCRUserNode;
@@ -116,7 +117,8 @@ public class NewReservation extends BaseAction {
                     String bcc = parameters.get("bcc")==null?null:getParameter(parameters, "bcc");
                     
                     Map<String,Object> bindings = new HashMap<String,Object>();
-                    //bindings.put("newUser",user);
+                    final JCRNodeWrapper node = resource.getNode();
+                    bindings.put("reservation",node);
                     try {
                         mailService.sendMessageWithTemplate(templatePath,bindings,to,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
                     } catch (ScriptException e) {
