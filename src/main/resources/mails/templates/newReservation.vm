@@ -3,8 +3,16 @@
 #* @vtlvariable name="reservation" type="org.jahia.services.content.JCRNodeWrapper" *#
 <html>
 <body>
-<h1>
-    ${bundle.getString("user.has.registered")} ${reservation.prenom")} ${reservation.nom")}</h1>
-<p>${reservation.adresse}</p>
+Bonjour ${reservation.properties.nom.string}
+${reservation.properties.prenom.string}
+<br/>
+${reservation.properties.adresse.string}
+<br/>
+${reservation.properties.codePostal.string}
+${reservation.properties.ville.string}
+<br/>
+${reservation.properties.telephone.string}
+</br>
+${reservation.properties.email.string}
 </body>
 </html>

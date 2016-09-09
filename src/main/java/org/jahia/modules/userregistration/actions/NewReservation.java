@@ -118,6 +118,8 @@ public class NewReservation extends BaseAction {
                     
                     Map<String,Object> bindings = new HashMap<String,Object>();
                     final JCRNodeWrapper node = resource.getNode();
+                    logger.info("********Node :"+node.getName());
+                    logger.info("Template path:"+templatePath);
                     bindings.put("reservation",node);
                     try {
                         mailService.sendMessageWithTemplate(templatePath,bindings,to,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
