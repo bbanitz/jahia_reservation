@@ -78,12 +78,16 @@ public class NewReservation extends BaseAction {
     public ActionResult doExecute(HttpServletRequest req, RenderContext renderContext, final Resource resource,
                                   JCRSessionWrapper session, final Map<String, List<String>> parameters, URLResolver urlResolver) throws Exception {
 
-        final String username = getParameter(parameters, "username");
-        final String password = getParameter(parameters, "password");
-        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+        final String nom = getParameter(parameters, "nom");
+        final String prenom = getParameter(parameters, "prenom");
+        final String adresse = getParameter(parameters,"adresse");
+        final String email = getParameter(parameters,"email");
+        
+        
+        if (StringUtils.isEmpty(nom) || StringUtils.isEmpty(prenom) || StringUtils.isEmpty(adresse) || StringUtils.isEmpty(email)) {
             return ActionResult.BAD_REQUEST;
         }
-
+        /*
         final Properties properties = new Properties();
         properties.put("j:email",parameters.get("desired_email").get(0));
         properties.put("j:firstName",parameters.get("desired_firstname").get(0));
@@ -96,12 +100,13 @@ public class NewReservation extends BaseAction {
                 }
             }
         }
-
+        */
         JCRTemplate.getInstance().doExecuteWithSystemSession(new JCRCallback<Boolean>() {
             @Override
             public Boolean doInJCR(JCRSessionWrapper session) throws RepositoryException {
-                final JCRUserNode user = userManagerService.createUser(username, password, properties, session);
-                session.save();
+            	
+                //final JCRUserNode user = userManagerService.createUser(username, password, properties, session);
+                //session.save();
                 if (mailService.isEnabled()) {
                     // Prepare mail to be sent :
                     boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
@@ -111,7 +116,7 @@ public class NewReservation extends BaseAction {
                     String bcc = parameters.get("bcc")==null?null:getParameter(parameters, "bcc");
                     
                     Map<String,Object> bindings = new HashMap<String,Object>();
-                    bindings.put("newUser",user);
+                    //bindings.put("newUser",user);
                     try {
                         mailService.sendMessageWithTemplate(templatePath,bindings,to,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
                     } catch (ScriptException e) {
