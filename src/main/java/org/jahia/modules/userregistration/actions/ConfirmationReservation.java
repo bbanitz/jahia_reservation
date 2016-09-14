@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.jcr.RepositoryException;
 import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.jahia.bin.ActionResult;
 import org.jahia.services.content.JCRCallback;
@@ -16,6 +17,7 @@ import org.jahia.services.content.decorator.JCRUserNode;
 import org.jahia.services.render.RenderContext;
 import org.jahia.services.render.Resource;
 import org.jahia.services.render.URLResolver;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +31,7 @@ public class ConfirmationReservation extends BaseAction {
             
         	@Override
             public Boolean doInJCR(JCRSessionWrapper session) throws RepositoryException {
-            	/*
+            	
                 if (mailService.isEnabled()) {
                     // Prepare mail to be sent :
                     boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
@@ -39,20 +41,21 @@ public class ConfirmationReservation extends BaseAction {
                     String bcc = parameters.get("bcc")==null?null:getParameter(parameters, "bcc");
                     
                     Map<String,Object> bindings = new HashMap<String,Object>();
-                    bindings.put("newUser",user);
+                    //bindings.put("newUser",user);
                     try {
                         mailService.sendMessageWithTemplate(templatePath,bindings,to,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
                     } catch (ScriptException e) {
-                        logger.error("Error sending e-mail notification for user creation", e);
+                        logger.error("Error sending e-mail notification for user confirmation", e);
                     }
                 }
-                */
+                
         		logger.info("confirmationReservation");
                 return true;
             }
         });
-
-		return null;
+        return new ActionResult(HttpServletResponse.SC_ACCEPTED, parameters.get("userredirectpage").get(0),
+				new JSONObject());
+		
 	}
 
 }
