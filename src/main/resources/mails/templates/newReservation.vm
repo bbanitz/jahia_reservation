@@ -1,18 +1,34 @@
 #* @vtlvariable name="newUser" type="org.jahia.services.usermanager.JahiaUser" *#
 #* @vtlvariable name="bundle" type="java.util.ResourceBundle" *#
 #* @vtlvariable name="reservation" type="org.jahia.services.content.JCRNodeWrapper" *#
+#* @vtlvariable name="confirmationlink" type="java.lang.String" *#
 <html>
 <body>
+
 Bonjour ${reservation.properties.nom.string}
 ${reservation.properties.prenom.string}
+  <br/>  
+Nous avons bien reçu votre demande de réservation pour le concert de Sheerdoor
+
+  <br/>  
 <br/>
-${reservation.properties.adresse.string}
+  votre adresse :
+  <br/>  
+  ${reservation.properties.adresse.string}
 <br/>
-${reservation.properties.codePostal.string}
-${reservation.properties.ville.string}
+  ${reservation.properties.codePostal.string}
+  ${reservation.properties.ville.string}
 <br/>
-${reservation.properties.telephone.string}
+<br/>
+  votre téléphone : ${reservation.properties.telephone.string}
 </br>
-${reservation.properties.email.string}
+
+  votre mail ${reservation.properties.email.string}
+<br/><br/>   
+  Nombre de places réservées : ${reservation.properties.places.string}  
+  Pour confirmer cette réservation veuillez cliquer sur le lien ci-dessous
+</br></br>
+  
+  <A type="submit" href="${confirmationlink}">${confirmationlink}</a>
 </body>
 </html>

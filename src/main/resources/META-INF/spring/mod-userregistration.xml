@@ -12,6 +12,10 @@
         <property name="name" value="newUser"/>
         <property name="templatePath" value="${userregistrationUserRegisteredTemplatePath:/mails/templates/userhasregistered.vm}"/>
     </bean>
+    <bean class="org.jahia.modules.userregistration.actions.ConfirmationReservation" parent="baseUserregistrationAction">
+        <property name="name" value="confirmationReservation"/>
+        <property name="templatePath" value="${userregistrationUserRegisteredTemplatePath:/mails/templates/userhasregistered.vm}"/>
+    </bean>
     <bean class="org.jahia.modules.userregistration.actions.NewReservation" parent="baseUserregistrationAction">
         <property name="name" value="newReservation"/>
         <property name="templatePath" value="${userregistrationUserRegisteredTemplatePath:/mails/templates/newReservation.vm}"/>

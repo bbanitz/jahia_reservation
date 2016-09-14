@@ -30,4 +30,6 @@
  - telephone (string)
  - modeReglement (string)
  - paye (boolean, text)
+ - places (long)
+ - accesKey (string)
 

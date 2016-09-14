@@ -19,42 +19,42 @@
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <template:addResources type="javascript"
 	resources="jquery.min.js,jquery.validate.js" />
-<c:if test="${not renderContext.liveMode || not renderContext.loggedIn}">
+
 	<script type="text/javascript">
 		$(document)
 				.ready(
 						function() {
-							$("#newUser")
+							$("#form1")
 									.validate(
 											{
 												rules : {
 													nom : "required",
 													prenom : "required",
+                                                    adresse : "required",
+                                                    codePostal : "required",
+                                                    ville : "required",
+                                                    telephone :"required",  
+                                                    places : "required",
+                                                    email : {required:true,email:true}
+                                                    
 												},
 												messages : {
-													desired_firstname : "<fmt:message key='userregistration.label.askFirstname'/>",
-													desired_lastname : "<fmt:message key='userregistration.label.askLastname'/>",
-													username : {
-														required : "<fmt:message key='userregistration.label.askUsername'/>",
-														minlength : "<fmt:message key='userregistration.label.usernameSizeWarning'/>"
-													},
-													password : {
-														required : "<fmt:message key='userregistration.label.askPassword'/>",
-														minlength : "<fmt:message key='userregistration.label.passwordSizeWarning'/>"
-													},
-													confirm_password : {
-														required : "<fmt:message key='userregistration.label.askPassword'/>",
-														minlength : "<fmt:message key='userregistration.label.passwordSizeWarning'/>",
-														equalTo : "<fmt:message key='userregistration.label.validatePassword'/>"
-													},
-													desired_email : "<fmt:message key='userregistration.label.validateEmail'/>"
+													prenom : "<fmt:message key='uneReservation.label.prenomManquant'/>",
+													nom : "<fmt:message key='uneReservation.label.nomManquant'/>",
+													adresse : "<fmt:message key='uneReservation.label.adresseManquante'/>",
+													codePostal : "<fmt:message key='uneReservation.label.codePostalManquant'/>",
+													ville : "<fmt:message key='uneReservation.label.villeManquante'/>",
+                                                    telephone : "<fmt:message key='uneReservation.label.telephoneManquant'/>", 
+													email : "<fmt:message key='uneReservation.label.emailManquant'/>",
+                                                    places : "<fmt:message key='uneReservation.label.placesManquant'/>"
 												}
 											});
 						});
 	</script>
 	<div class="Form">
 		<template:tokenizedForm>
-			<form method="post"
+		    ${url.base}${currentNode.path}.newReservation.do
+			<form id="form1" method="post"
 				action="<c:url value='${url.base}${currentNode.path}.newReservation.do'/>"
 				name="newReservation" id="newReservation">
 				<input type="hidden" name="userredirectpage"
@@ -99,8 +99,8 @@
 					</p>
 					<p>
 						<label class="left" for="codePostal"><fmt:message
-								key="uneReservation.label.codePostal" /></label><input name="codePostal"
-							id="codePostal" />
+								key="uneReservation.label.codePostal" /></label><input
+							name="codePostal" id="codePostal" />
 					</p>
 					<p>
 						<label class="left" for="ville"><fmt:message
@@ -118,12 +118,17 @@
 								key="uneReservation.label.email" /></label><input name="email"
 							id="email" />
 					</p>
+					<p>
+						<label class="left" for="places"><fmt:message
+								key="uneReservation.label.places" /></label><input name="places"
+							id="places" />
+					</p>
 
 					<input type="submit" class="button"
 						value="<fmt:message key='userregistration.label.form.create'/>" />
-	
-	</fieldset>
-	</form>
-	</template:tokenizedForm>
+
+				</fieldset>
+			</form>
+		</template:tokenizedForm>
 	</div>
-</c:if>
+

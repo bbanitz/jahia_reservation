@@ -53,8 +53,11 @@ import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jahia.bin.ActionResult;
+import org.jahia.bin.Jahia;
+import org.jahia.bin.Render;
 import org.jahia.services.content.JCRCallback;
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.JCRSessionWrapper;
@@ -66,6 +69,7 @@ import org.jahia.services.render.URLResolver;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Action handler for creating new user and sending an e-mail notification.
@@ -73,65 +77,96 @@ import org.slf4j.LoggerFactory;
  * @author rincevent
  */
 public class NewReservation extends BaseAction {
-    
-    private static Logger logger = LoggerFactory.getLogger(NewReservation.class);
+	private static Logger logger = LoggerFactory.getLogger(NewReservation.class);
 
-    public ActionResult doExecute(HttpServletRequest req, RenderContext renderContext, final Resource resource,
-                                  JCRSessionWrapper session, final Map<String, List<String>> parameters, URLResolver urlResolver) throws Exception {
+	private String generateKey(String email) {
+			return DigestUtils.md5Hex(email + System.currentTimeMillis());
+	}
 
-        final String nom = getParameter(parameters, "nom");
-        final String prenom = getParameter(parameters, "prenom");
-        final String adresse = getParameter(parameters,"adresse");
-        final String email = getParameter(parameters,"email");
-        
-        
-        if (StringUtils.isEmpty(nom) || StringUtils.isEmpty(prenom) || StringUtils.isEmpty(adresse) || StringUtils.isEmpty(email)) {
-            return ActionResult.BAD_REQUEST;
-        }
-        /*
-        final Properties properties = new Properties();
-        properties.put("j:email",parameters.get("desired_email").get(0));
-        properties.put("j:firstName",parameters.get("desired_firstname").get(0));
-        properties.put("j:lastName",parameters.get("desired_lastname").get(0));
-        for (Map.Entry<String, List<String>> param : parameters.entrySet()) {
-            if (param.getKey().startsWith("j:")) {
-                String value = getParameter(parameters, param.getKey());
-                if (value != null) {
-                    properties.put(param.getKey(), value);
-                }
-            }
-        }
-        */
-        JCRTemplate.getInstance().doExecuteWithSystemSession(new JCRCallback<Boolean>() {
-            @Override
-            public Boolean doInJCR(JCRSessionWrapper session) throws RepositoryException {
-            	
-                //final JCRUserNode user = userManagerService.createUser(username, password, properties, session);
-                //session.save();
-                if (mailService.isEnabled()) {
-                    // Prepare mail to be sent :
-                    boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
-                    String to = toAdministratorMail ? mailService.getSettings().getTo():getParameter(parameters, "to");
-                    String from = parameters.get("from")==null?mailService.getSettings().getFrom():getParameter(parameters, "from");
-                    String cc = parameters.get("cc")==null?null:getParameter(parameters, "cc");
-                    String bcc = parameters.get("bcc")==null?null:getParameter(parameters, "bcc");
-                    
-                    Map<String,Object> bindings = new HashMap<String,Object>();
-                    final JCRNodeWrapper node = resource.getNode();
-                    logger.info("********Node :"+node.getName());
-                    logger.info("Template path:"+templatePath);
-                    bindings.put("reservation",node);
-                    try {
-                        mailService.sendMessageWithTemplate(templatePath,bindings,to,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
-                    } catch (ScriptException e) {
-                        logger.error("Error sending e-mail notification for user creation", e);
-                    }
-                }
-                
-                return true;
-            }
-        });
+	public ActionResult doExecute(HttpServletRequest req, RenderContext renderContext, final Resource resource,
+			JCRSessionWrapper session, final Map<String, List<String>> parameters, URLResolver urlResolver)
+			throws Exception {
+		final HttpServletRequest requ=req;
+		final String nom = getParameter(parameters, "nom");
+		final String prenom = getParameter(parameters, "prenom");
+		final String adresse = getParameter(parameters, "adresse");
+		final String codePostal = getParameter(parameters, "codePostal");
+		final String ville = getParameter(parameters, "ville");
+		final String telephone = getParameter(parameters, "telephone");
+		final String email = getParameter(parameters, "email");
+		final String places = getParameter(parameters, "places");
 
-        return new ActionResult(HttpServletResponse.SC_ACCEPTED,parameters.get("userredirectpage").get(0), new JSONObject());
-    }
+		if (StringUtils.isEmpty(nom) || StringUtils.isEmpty(prenom) || StringUtils.isEmpty(adresse)
+				|| StringUtils.isEmpty(email)) {
+			return ActionResult.BAD_REQUEST;
+		}
+		/*
+		 * final Properties properties = new Properties();
+		 * properties.put("j:email",parameters.get("desired_email").get(0));
+		 * properties.put("j:firstName",parameters.get("desired_firstname").get(
+		 * 0));
+		 * properties.put("j:lastName",parameters.get("desired_lastname").get(0)
+		 * ); for (Map.Entry<String, List<String>> param :
+		 * parameters.entrySet()) { if (param.getKey().startsWith("j:")) {
+		 * String value = getParameter(parameters, param.getKey()); if (value !=
+		 * null) { properties.put(param.getKey(), value); } } }
+		 */
+		JCRTemplate.getInstance().doExecuteWithSystemSession(new JCRCallback<Boolean>() {
+			@Override
+			public Boolean doInJCR(JCRSessionWrapper session) throws RepositoryException {
+
+				// final JCRUserNode user =
+				// userManagerService.createUser(username, password, properties,
+				// session);
+				// session.save();
+				JCRNodeWrapper reservationFolder = session.getNode("/sites/LARBRE/contents/reservations");
+				JCRNodeWrapper emailFolder;
+				if (reservationFolder.hasNode(email)) emailFolder = reservationFolder.getNode(email);
+				else emailFolder = reservationFolder.addNode(email,"jnt:contentFolder");
+				session.save();
+				JCRNodeWrapper uneReservation = emailFolder.addNode(generateKey(email), "jnt:uneReservation");
+				uneReservation.setProperty("nom", nom);
+				uneReservation.setProperty("prenom", prenom);
+				uneReservation.setProperty("adresse", adresse);
+				uneReservation.setProperty("codePostal", codePostal);
+				uneReservation.setProperty("ville", ville);
+				uneReservation.setProperty("telephone", telephone);
+				uneReservation.setProperty("email", email);
+				uneReservation.setProperty("places", places);
+				session.save();
+				if (mailService.isEnabled()) {
+					// Prepare mail to be sent :
+					boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
+					String to = toAdministratorMail ? mailService.getSettings().getTo()
+							: getParameter(parameters, "to");
+					String from = parameters.get("from") == null ? mailService.getSettings().getFrom()
+							: getParameter(parameters, "from");
+					String cc = parameters.get("cc") == null ? null : getParameter(parameters, "cc");
+					String bcc = parameters.get("bcc") == null ? null : getParameter(parameters, "bcc");
+
+					Map<String, Object> bindings = new HashMap<String, Object>();
+					final JCRNodeWrapper node = resource.getNode();
+					logger.info("********Node :" + node.getName());
+					logger.info("Template path:" + templatePath);
+					bindings.put("reservation", node);
+					
+		            bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
+		                    Jahia.getContextPath() + Render.getRenderServletPath() + "/live/"
+		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?key="+email+"&exec=add");
+
+					try {
+						mailService.sendMessageWithTemplate(templatePath, bindings, to, from, cc, bcc,
+								resource.getLocale(), "Jahia User Registration");
+					} catch (ScriptException e) {
+						logger.error("Error sending e-mail notification for user creation", e);
+					}
+				}
+
+				return true;
+			}
+		});
+
+		return new ActionResult(HttpServletResponse.SC_ACCEPTED, parameters.get("userredirectpage").get(0),
+				new JSONObject());
+	}
 }
