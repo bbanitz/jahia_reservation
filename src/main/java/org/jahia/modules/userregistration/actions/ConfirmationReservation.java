@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jahia.bin.ActionResult;
+import org.jahia.bin.Jahia;
+import org.jahia.bin.Render;
 import org.jahia.services.content.JCRCallback;
+import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.JCRSessionWrapper;
 import org.jahia.services.content.JCRTemplate;
 import org.jahia.services.content.decorator.JCRUserNode;
@@ -39,9 +42,17 @@ public class ConfirmationReservation extends BaseAction {
                     String from = parameters.get("from")==null?mailService.getSettings().getFrom():getParameter(parameters, "from");
                     String cc = parameters.get("cc")==null?null:getParameter(parameters, "cc");
                     String bcc = parameters.get("bcc")==null?null:getParameter(parameters, "bcc");
+                    String email = getParameter(parameters, "email");
+                    String key = getParameter(parameters, "key");
                     
                     Map<String,Object> bindings = new HashMap<String,Object>();
-                    //bindings.put("newUser",user);
+                    JCRNodeWrapper node = session.getNode("/sites/LARBRE/contents/reservations/"+email+"/"+key);
+					bindings.put("reservation", node);
+					/*
+		            bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
+		                    Jahia.getContextPath() + Render.getRenderServletPath() + "/live/"
+		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"key=add");
+                    */
                     try {
                         mailService.sendMessageWithTemplate(templatePath,bindings,to,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
                     } catch (ScriptException e) {

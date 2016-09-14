@@ -124,7 +124,8 @@ public class NewReservation extends BaseAction {
 				if (reservationFolder.hasNode(email)) emailFolder = reservationFolder.getNode(email);
 				else emailFolder = reservationFolder.addNode(email,"jnt:contentFolder");
 				session.save();
-				JCRNodeWrapper uneReservation = emailFolder.addNode(generateKey(email), "jnt:uneReservation");
+				String key=generateKey(email);
+				JCRNodeWrapper uneReservation = emailFolder.addNode(key, "jnt:uneReservation");
 				uneReservation.setProperty("nom", nom);
 				uneReservation.setProperty("prenom", prenom);
 				uneReservation.setProperty("adresse", adresse);
@@ -149,10 +150,9 @@ public class NewReservation extends BaseAction {
 					logger.info("********Node :" + node.getName());
 					logger.info("Template path:" + templatePath);
 					bindings.put("reservation", node);
-					
-		            bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
+					bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
 		                    Jahia.getContextPath() + Render.getRenderServletPath() + "/live/"
-		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?key="+email+"&exec=add");
+		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"&key="+key);
 
 					try {
 						mailService.sendMessageWithTemplate(templatePath, bindings, to, from, cc, bcc,
