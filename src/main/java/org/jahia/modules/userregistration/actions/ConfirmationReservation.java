@@ -1,7 +1,13 @@
 package org.jahia.modules.userregistration.actions;
 
+import static javax.servlet.http.HttpServletResponse.SC_OK;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.jcr.RepositoryException;
@@ -34,7 +40,7 @@ public class ConfirmationReservation extends BaseAction {
             
         	@Override
             public Boolean doInJCR(JCRSessionWrapper session) throws RepositoryException {
-            	
+        		logger.info("begin confirmationReservation");
                 if (mailService.isEnabled()) {
                     // Prepare mail to be sent :
                     boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
@@ -48,6 +54,10 @@ public class ConfirmationReservation extends BaseAction {
                     Map<String,Object> bindings = new HashMap<String,Object>();
                     JCRNodeWrapper node = session.getNode("/sites/LARBRE/contents/reservations/"+email+"/"+key);
 					bindings.put("reservation", node);
+					NumberFormat formatter = DecimalFormat.getInstance(Locale.FRANCE);
+					formatter.setMinimumFractionDigits(2);
+					formatter.setMaximumFractionDigits(2);
+					bindings.put("total",formatter.format(node.getProperty("places").getDouble()*8));
 					/*
 		            bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
 		                    Jahia.getContextPath() + Render.getRenderServletPath() + "/live/"
@@ -60,12 +70,11 @@ public class ConfirmationReservation extends BaseAction {
                     }
                 }
                 
-        		logger.info("confirmationReservation");
+        		logger.info("end confirmationReservation");
                 return true;
             }
         });
-        return new ActionResult(HttpServletResponse.SC_ACCEPTED, parameters.get("userredirectpage").get(0),
-				new JSONObject());
+        return new ActionResult(HttpServletResponse.SC_OK,"/sites/LARBRE/home");
 		
 	}
 

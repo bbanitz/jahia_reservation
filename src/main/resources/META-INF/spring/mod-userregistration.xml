@@ -15,6 +15,7 @@
     <bean class="org.jahia.modules.userregistration.actions.ConfirmationReservation" parent="baseUserregistrationAction">
         <property name="name" value="confirmationReservation"/>
         <property name="templatePath" value="${userregistrationUserRegisteredTemplatePath:/mails/templates/confirmationReservation.vm}"/>
+        <property name="requireAuthenticatedUser" value="false"/>
     </bean>
     <bean class="org.jahia.modules.userregistration.actions.NewReservation" parent="baseUserregistrationAction">
         <property name="name" value="newReservation"/>

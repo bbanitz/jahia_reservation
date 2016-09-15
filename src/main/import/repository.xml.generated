@@ -23,26 +23,25 @@
                                                 jcr:primaryType="jnt:javaPackageFolder">
                                                 <actions jcr:mixinTypes="jmix:sourceControl"
                                           jcr:primaryType="jnt:javaPackageFolder">
-                                                    <NewReservation.java jcr:mixinTypes="jmix:sourceControl"
-                                                         jcr:primaryType="jnt:javaSourceFile"/>
+                                                    <NewReservation.java jcr:primaryType="jnt:javaSourceFile"/>
                                                 </actions>
                                             </userregistration>
                                         </modules>
                                     </jahia>
                                 </org>
                             </java>
-                            <resources jcr:primaryType="jnt:folder">
+                            <resources jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
                                 <jnt_uneReservation jcr:primaryType="jnt:nodeTypeFolder">
                                     <html jcr:primaryType="jnt:templateTypeFolder">
                                         <uneReservation.jsp jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_uneReservation>
-                                <mails jcr:primaryType="jnt:folder">
-                                    <templates jcr:primaryType="jnt:folder">
+                                <mails jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                    <templates jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
                                         <newReservation.vm jcr:primaryType="jnt:editableFile"/>
                                     </templates>
                                 </mails>
-                                <META-INF jcr:primaryType="jnt:metaInfFolder">
+                                <META-INF jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:metaInfFolder">
                                     <definitions.cnd jcr:primaryType="jnt:definitionFile"/>
                                 </META-INF>
                             </resources>

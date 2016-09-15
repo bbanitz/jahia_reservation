@@ -2,6 +2,7 @@
 #* @vtlvariable name="bundle" type="java.util.ResourceBundle" *#
 #* @vtlvariable name="reservation" type="org.jahia.services.content.JCRNodeWrapper" *#
 #* @vtlvariable name="confirmationlink" type="java.lang.String" *#
+#* @vtlvariable name="total" type="java.lang.String" *#
 <html>
 <body>
 
@@ -11,24 +12,30 @@ ${reservation.properties.prenom.string}
 Nous confirmons votre réservation pour le concert de Sheerdoor
 
   <br/>  
-<br/>
-  votre adresse :
-  <br/>  
-  ${reservation.properties.adresse.string}
-<br/>
-  ${reservation.properties.codePostal.string}
-  ${reservation.properties.ville.string}
-<br/>
-<br/>
-  votre téléphone : ${reservation.properties.telephone.string}
-</br>
-
   votre mail ${reservation.properties.email.string}
 <br/><br/>   
   Nombre de places réservées : ${reservation.properties.places.string}  
-  Pour confirmer cette réservation veuillez cliquer sur le lien ci-dessous
-</br></br>
+<br/><br/>    
+  Votre réservation sera effective dès réception de votre règlement de ${total} € 
+  <br/>
+  à l'adresse suivante : 
+  <br/>
+  Danielle NOTH
+  <br/>
+  L'ARBRE
+  <br/>
+  11a rue des jardins
+  <br/>
+  67800 Bischheim
+  <br/><br/>
   
-  <A type="submit" href="${confirmationlink}">${confirmationlink}</a>
+  <p style="font-size:1.5em">Veuillez rappeler votre email sur votre règlement : ${reservation.properties.email.string}</p>
+  
+  Nous vous remercions de votre commande
+  
+  
+   
+</br></br>
+ 
 </body>
 </html>
