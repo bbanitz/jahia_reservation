@@ -74,7 +74,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Action handler for creating new user and sending an e-mail notification.
  *
- * @author rincevent
+ * @Bernard BANITZ
  */
 public class NewReservation extends BaseAction {
 	private static Logger logger = LoggerFactory.getLogger(NewReservation.class);
@@ -138,24 +138,24 @@ public class NewReservation extends BaseAction {
 				if (mailService.isEnabled()) {
 					// Prepare mail to be sent :
 					boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
-					String to = toAdministratorMail ? mailService.getSettings().getTo()
+					String cc = toAdministratorMail ? mailService.getSettings().getTo()
 							: getParameter(parameters, "to");
-					String from = parameters.get("from") == null ? mailService.getSettings().getFrom()
-							: getParameter(parameters, "from");
-					String cc = parameters.get("cc") == null ? null : getParameter(parameters, "cc");
+					String from = cc;
+                    logger.info("send copie to :"+cc);
+					//String cc = parameters.get("cc") == null ? null : getParameter(parameters, "cc");
 					String bcc = parameters.get("bcc") == null ? null : getParameter(parameters, "bcc");
 
 					Map<String, Object> bindings = new HashMap<String, Object>();
 					final JCRNodeWrapper node = resource.getNode();
 					logger.info("********Node :" + node.getName());
 					logger.info("Template path:" + templatePath);
-					bindings.put("reservation", node);
+					bindings.put("reservation",uneReservation);
 					bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
 		                    Jahia.getContextPath() + Render.getRenderServletPath() + "/live/"
 		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"&key="+key);
 
 					try {
-						mailService.sendMessageWithTemplate(templatePath, bindings, to, from, cc, bcc,
+						mailService.sendMessageWithTemplate(templatePath, bindings, email, from, cc, bcc,
 								resource.getLocale(), "Jahia User Registration");
 					} catch (ScriptException e) {
 						logger.error("Error sending e-mail notification for user creation", e);

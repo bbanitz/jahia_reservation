@@ -14,13 +14,26 @@
 
 [jnt:passwordRecoveryForm] > jnt:content, jmix:formContent
 
-[jnt:uneReservation] > jnt:content, jmix:formContent
+[jnt:reservation] > jnt:content, jmix:formContent
  - toAdministrator (boolean) = 'false' autocreated indexed=no
  - from (string) indexed=no
  - to (string) indexed=no
  - cc (string) indexed=no
  - bcc (string) indexed=no
  - userRedirectPage (weakreference) mandatory indexed=no
+
+[jnt:reservations] > jnt:content, jmix:basicContent
+ itemtype = content
+ + * (jnt:uneReservation) = jnt:uneReservation
+ - toAdministrator (boolean) = 'false' autocreated indexed=no
+ - from (string) indexed=no
+ - to (string) indexed=no
+ - cc (string) indexed=no
+ - bcc (string) indexed=no
+ - userRedirectPage (weakreference) mandatory indexed=no
+ - liste (weakreference) primary multiple
+
+[jnt:uneReservation] > jnt:content, jmix:formContent
  - nom (string) mandatory
  - prenom (string) mandatory
  - adresse (string) mandatory
@@ -32,4 +45,5 @@
  - paye (boolean, text)
  - places (long)
  - accesKey (string)
+ - reservationParent (weakreference)
 

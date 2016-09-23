@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ConfirmationReservation extends BaseAction {
-	private static Logger logger = LoggerFactory.getLogger(NewUser.class);
+	private static Logger logger = LoggerFactory.getLogger(ConfirmationReservation.class);
 	@Override
     public ActionResult doExecute(HttpServletRequest req, RenderContext renderContext, final Resource resource,
             JCRSessionWrapper session, final Map<String, List<String>> parameters, URLResolver urlResolver) throws Exception {
@@ -44,9 +44,9 @@ public class ConfirmationReservation extends BaseAction {
                 if (mailService.isEnabled()) {
                     // Prepare mail to be sent :
                     boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
-                    String to = toAdministratorMail ? mailService.getSettings().getTo():getParameter(parameters, "to");
+                    String cc = toAdministratorMail ? mailService.getSettings().getTo():getParameter(parameters, "to");
                     String from = parameters.get("from")==null?mailService.getSettings().getFrom():getParameter(parameters, "from");
-                    String cc = parameters.get("cc")==null?null:getParameter(parameters, "cc");
+                    logger.info("send copie to : "+cc);
                     String bcc = parameters.get("bcc")==null?null:getParameter(parameters, "bcc");
                     String email = getParameter(parameters, "email");
                     String key = getParameter(parameters, "key");
@@ -64,7 +64,7 @@ public class ConfirmationReservation extends BaseAction {
 		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"key=add");
                     */
                     try {
-                        mailService.sendMessageWithTemplate(templatePath,bindings,to,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
+                        mailService.sendMessageWithTemplate(templatePath,bindings,email,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
                     } catch (ScriptException e) {
                         logger.error("Error sending e-mail notification for user confirmation", e);
                     }

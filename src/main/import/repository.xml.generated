@@ -23,7 +23,10 @@
                                                 jcr:primaryType="jnt:javaPackageFolder">
                                                 <actions jcr:mixinTypes="jmix:sourceControl"
                                           jcr:primaryType="jnt:javaPackageFolder">
-                                                    <NewReservation.java jcr:primaryType="jnt:javaSourceFile"/>
+                                                    <ConfirmationReservation.java jcr:mixinTypes="jmix:sourceControl"
+                                                                  jcr:primaryType="jnt:javaSourceFile"/>
+                                                    <NewReservation.java jcr:mixinTypes="jmix:sourceControl"
+                                                         jcr:primaryType="jnt:javaSourceFile"/>
                                                 </actions>
                                             </userregistration>
                                         </modules>
@@ -31,18 +34,30 @@
                                 </org>
                             </java>
                             <resources jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
-                                <jnt_uneReservation jcr:primaryType="jnt:nodeTypeFolder">
-                                    <html jcr:primaryType="jnt:templateTypeFolder">
+                                <jnt_reservations jcr:mixinTypes="jmix:sourceControl"
+                                       jcr:primaryType="jnt:nodeTypeFolder">
+                                    <html jcr:mixinTypes="jmix:sourceControl"
+                              jcr:primaryType="jnt:templateTypeFolder">
+                                        <reservations.create.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
+                                        <reservations.input.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
+                                        <reservations.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
+                                    </html>
+                                </jnt_reservations>
+                                <jnt_uneReservation jcr:mixinTypes="jmix:sourceControl"
+                                         jcr:primaryType="jnt:nodeTypeFolder">
+                                    <html jcr:mixinTypes="jmix:sourceControl"
+                              jcr:primaryType="jnt:templateTypeFolder">
                                         <uneReservation.jsp jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_uneReservation>
-                                <mails jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
-                                    <templates jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                <mails jcr:primaryType="jnt:folder">
+                                    <templates jcr:primaryType="jnt:folder">
                                         <newReservation.vm jcr:primaryType="jnt:editableFile"/>
                                     </templates>
                                 </mails>
                                 <META-INF jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:metaInfFolder">
-                                    <definitions.cnd jcr:primaryType="jnt:definitionFile"/>
+                                    <definitions.cnd jcr:mixinTypes="jmix:sourceControl"
+                                         jcr:primaryType="jnt:definitionFile"/>
                                 </META-INF>
                             </resources>
                         </main>
