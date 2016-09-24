@@ -56,8 +56,10 @@
 		   	<form id="form1" method="post"
 				action="<c:url value='${url.base}${currentNode.path}.newReservation.do'/>"
 				name="newReservation" id="newReservation">
-				<input type="hidden" name="userredirectpage"
-					value="${currentNode.properties['userRedirectPage'].node.path}" />
+				<input type="hidden" name="newReservationPage"
+					value="${currentNode.properties['newReservationPage'].node.path}" />
+				<input type="hidden" name="confirmationReservationPage"
+					value="${currentNode.properties['confirmationReservationPage'].node.path}" />
 				<c:if test="${not empty currentNode.properties['from']}">
 					<input type="hidden" name="from"
 						value="${currentNode.properties['from'].string}" />
@@ -67,7 +69,7 @@
 						value="${currentNode.properties['to'].string}" />
 				</c:if>
 				<c:if test="${not empty currentNode.properties['cc']}">
-					<input  name="cc"
+					<input input type="hidden" name="cc"
 						value="${currentNode.properties['cc'].string}" />
 				</c:if>
 				<c:if test="${not empty currentNode.properties['bcc']}">

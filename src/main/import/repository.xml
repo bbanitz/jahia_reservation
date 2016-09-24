@@ -38,15 +38,12 @@
                                        jcr:primaryType="jnt:nodeTypeFolder">
                                     <html jcr:mixinTypes="jmix:sourceControl"
                               jcr:primaryType="jnt:templateTypeFolder">
-                                        <reservations.create.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
                                         <reservations.input.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
-                                        <reservations.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
+                                        <reservations.jsp jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_reservations>
-                                <jnt_uneReservation jcr:mixinTypes="jmix:sourceControl"
-                                         jcr:primaryType="jnt:nodeTypeFolder">
-                                    <html jcr:mixinTypes="jmix:sourceControl"
-                              jcr:primaryType="jnt:templateTypeFolder">
+                                <jnt_uneReservation jcr:primaryType="jnt:nodeTypeFolder">
+                                    <html jcr:primaryType="jnt:templateTypeFolder">
                                         <uneReservation.jsp jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_uneReservation>

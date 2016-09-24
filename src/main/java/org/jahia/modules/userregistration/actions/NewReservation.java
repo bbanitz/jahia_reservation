@@ -139,7 +139,7 @@ public class NewReservation extends BaseAction {
 					// Prepare mail to be sent :
 					boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
 					String cc = toAdministratorMail ? mailService.getSettings().getTo()
-							: getParameter(parameters, "to");
+							: getParameter(parameters, "cc");
 					String from = cc;
                     logger.info("send copie to :"+cc);
 					//String cc = parameters.get("cc") == null ? null : getParameter(parameters, "cc");
@@ -150,9 +150,9 @@ public class NewReservation extends BaseAction {
 					logger.info("********Node :" + node.getName());
 					logger.info("Template path:" + templatePath);
 					bindings.put("reservation",uneReservation);
-					bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
+                    bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
 		                    Jahia.getContextPath() + Render.getRenderServletPath() + "/live/"
-		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"&key="+key);
+		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"&key="+key+"&copie="+cc+"&confirmationPage="+ parameters.get("confirmationReservationPage").get(0));
 
 					try {
 						mailService.sendMessageWithTemplate(templatePath, bindings, email, from, cc, bcc,
@@ -166,7 +166,7 @@ public class NewReservation extends BaseAction {
 			}
 		});
 
-		return new ActionResult(HttpServletResponse.SC_ACCEPTED, parameters.get("userredirectpage").get(0),
+		return new ActionResult(HttpServletResponse.SC_ACCEPTED, parameters.get("newReservationPage").get(0),
 				new JSONObject());
 	}
 }

@@ -43,14 +43,12 @@ public class ConfirmationReservation extends BaseAction {
         		logger.info("begin confirmationReservation");
                 if (mailService.isEnabled()) {
                     // Prepare mail to be sent :
-                    boolean toAdministratorMail = Boolean.valueOf(getParameter(parameters, "toAdministrator", "false"));
-                    String cc = toAdministratorMail ? mailService.getSettings().getTo():getParameter(parameters, "to");
                     String from = parameters.get("from")==null?mailService.getSettings().getFrom():getParameter(parameters, "from");
-                    logger.info("send copie to : "+cc);
                     String bcc = parameters.get("bcc")==null?null:getParameter(parameters, "bcc");
                     String email = getParameter(parameters, "email");
                     String key = getParameter(parameters, "key");
-                    
+                    String cc = getParameter(parameters,"copie");
+                    logger.info("send copie to : "+cc);
                     Map<String,Object> bindings = new HashMap<String,Object>();
                     JCRNodeWrapper node = session.getNode("/sites/LARBRE/contents/reservations/"+email+"/"+key);
 					bindings.put("reservation", node);
@@ -74,7 +72,7 @@ public class ConfirmationReservation extends BaseAction {
                 return true;
             }
         });
-        return new ActionResult(HttpServletResponse.SC_OK,"/sites/LARBRE/home");
+        return new ActionResult(HttpServletResponse.SC_OK,parameters.get("confirmationPage").get(0));
 		
 	}
 
