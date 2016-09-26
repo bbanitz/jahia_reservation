@@ -1,0 +1,46 @@
+#* @vtlvariable name="newUser" type="org.jahia.services.usermanager.JahiaUser" *#
+#* @vtlvariable name="bundle" type="java.util.ResourceBundle" *#
+#* @vtlvariable name="reservation" type="org.jahia.services.content.JCRNodeWrapper" *#
+#* @vtlvariable name="confirmationlink" type="java.lang.String" *#
+#* @vtlvariable name="total" type="java.lang.String" *#
+<html>
+<body>
+
+Bonjour ${reservation.properties.nom.string}
+${reservation.properties.prenom.string}
+  <br/>  
+Nous confirmons votre réservation pour le concert de Sheerdoor
+
+  <br/>  
+  votre mail ${reservation.properties.email.string}
+<br/><br/>   
+  Nombre de places réservées : ${reservation.properties.places.string}  
+<br/><br/>    
+  Votre réservation sera effective dès réception de votre règlement de ${total} € 
+  <br/>
+  à l'adresse suivante : 
+  <br/>
+  Danielle NOTH
+  <br/>
+  L'ARBRE
+  <br/>
+  11a rue des jardins
+  <br/>
+  67800 Bischheim
+  <br/>
+  <br/>
+  mail : reservations@larbre-bischheim.org
+  <br/>
+  Tél : 06 82 83 56 14
+  <br/><br/>
+  
+  <p style="font-size:1.5em">Veuillez rappeler votre email sur votre règlement : ${reservation.properties.email.string}</p>
+  
+  Nous vous remercions de votre commande
+  
+  
+   
+</br></br>
+ 
+</body>
+</html>
