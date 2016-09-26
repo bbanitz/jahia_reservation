@@ -127,6 +127,7 @@
 
 					<input type="submit" class="button"
 						value="<fmt:message key='uneReservation.label.form.Validation'/>" />
+                    <INPUT Type="button" VALUE="Annuler" onClick="history.go(-1);return true;">
 
 				</fieldset>
 			</form>

@@ -12,21 +12,14 @@
                   j:staticMountPointProviderKey="module-userregistration-2.0.5">
                     <src jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
                         <main jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
-                            <java jcr:mixinTypes="jmix:sourceControl"
-                        jcr:primaryType="jnt:javaPackageFolder">
-                                <org jcr:mixinTypes="jmix:sourceControl"
-                          jcr:primaryType="jnt:javaPackageFolder">
-                                    <jahia jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
-                                        <modules jcr:mixinTypes="jmix:sourceControl"
-                                    jcr:primaryType="jnt:javaPackageFolder">
-                                            <userregistration jcr:mixinTypes="jmix:sourceControl"
-                                                jcr:primaryType="jnt:javaPackageFolder">
-                                                <actions jcr:mixinTypes="jmix:sourceControl"
-                                          jcr:primaryType="jnt:javaPackageFolder">
-                                                    <ConfirmationReservation.java jcr:mixinTypes="jmix:sourceControl"
-                                                                  jcr:primaryType="jnt:javaSourceFile"/>
-                                                    <NewReservation.java jcr:mixinTypes="jmix:sourceControl"
-                                                         jcr:primaryType="jnt:javaSourceFile"/>
+                            <java jcr:primaryType="jnt:javaPackageFolder">
+                                <org jcr:primaryType="jnt:javaPackageFolder">
+                                    <jahia jcr:primaryType="jnt:folder">
+                                        <modules jcr:primaryType="jnt:javaPackageFolder">
+                                            <userregistration jcr:primaryType="jnt:javaPackageFolder">
+                                                <actions jcr:primaryType="jnt:javaPackageFolder">
+                                                    <ConfirmationReservation.java jcr:primaryType="jnt:javaSourceFile"/>
+                                                    <NewReservation.java jcr:primaryType="jnt:javaSourceFile"/>
                                                 </actions>
                                             </userregistration>
                                         </modules>
@@ -40,6 +33,7 @@
                               jcr:primaryType="jnt:templateTypeFolder">
                                         <reservations.input.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
                                         <reservations.jsp jcr:primaryType="jnt:viewFile"/>
+                                        <reservations.liste.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_reservations>
                                 <jnt_uneReservation jcr:primaryType="jnt:nodeTypeFolder">
@@ -47,14 +41,14 @@
                                         <uneReservation.jsp jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_uneReservation>
-                                <mails jcr:primaryType="jnt:folder">
-                                    <templates jcr:primaryType="jnt:folder">
+                                <mails jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                    <templates jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                        <confirmationReservation.vm jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:editableFile"/>
                                         <newReservation.vm jcr:primaryType="jnt:editableFile"/>
                                     </templates>
                                 </mails>
-                                <META-INF jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:metaInfFolder">
-                                    <definitions.cnd jcr:mixinTypes="jmix:sourceControl"
-                                         jcr:primaryType="jnt:definitionFile"/>
+                                <META-INF jcr:primaryType="jnt:metaInfFolder">
+                                    <definitions.cnd jcr:primaryType="jnt:definitionFile"/>
                                 </META-INF>
                             </resources>
                         </main>

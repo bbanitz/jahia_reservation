@@ -27,6 +27,11 @@ Nous confirmons votre réservation pour le concert de Sheerdoor
   11a rue des jardins
   <br/>
   67800 Bischheim
+  <br/>
+  <br/>
+  mail : reservations@larbre-bischheim.org
+  <br/>
+  Tél : 06 82 83 56 14
   <br/><br/>
   
   <p style="font-size:1.5em">Veuillez rappeler votre email sur votre règlement : ${reservation.properties.email.string}</p>
