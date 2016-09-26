@@ -1,2 +1,2 @@
 # jahia_reservation
-##systeme de réservation
+##système de réservation
