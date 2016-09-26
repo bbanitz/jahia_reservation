@@ -1,6 +1,8 @@
 # jahia_reservation
 ##description
 Module pour Jahia pour la réservation de billets de spectacle.
+<br/>
 envoi de mails automatiques.
-stockage des données dans le repository jahia
+<br/>
+stockage des données dans le repository jahia.
 
