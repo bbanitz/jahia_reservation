@@ -41,7 +41,8 @@
  - email (string) mandatory
  - telephone (string)
  - modeReglement (string)
- - paye (boolean, text)
+ - paye (boolean, text) = 'false' autocreated
+ - confirmation (boolean, text) = 'false' autocreated
  - places (long)
  - accesKey (string)
  - reservationParent (weakreference)

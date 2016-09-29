@@ -8,6 +8,10 @@
         <property name="mailService" ref="MailService"/>
     </bean>
     
+    <bean class="org.jahia.modules.userregistration.actions.ReservationAction">
+        <property name="name" value="reservationAction"/>
+    </bean>
+
     <bean class="org.jahia.modules.userregistration.actions.NewUser" parent="baseUserregistrationAction">
         <property name="name" value="newUser"/>
         <property name="templatePath" value="${userregistrationUserRegisteredTemplatePath:/mails/templates/userhasregistered.vm}"/>

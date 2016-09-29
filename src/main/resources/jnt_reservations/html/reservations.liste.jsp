@@ -18,11 +18,67 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 
+
 <jcr:sql var="reservations"
     sql="select * from [jnt:uneReservation]"/>
-
+<table class="table-bordered table-striped">
+  <tbody>
+    <tr>
+      <th>Email</th><th>Nom</th><th>Prénom</th><th>adresse</th><th>code postal</th><th>ville</th><th>téléphone</th><th>places</th><th>etat</th>
+    </tr>  
 <c:forEach items="${reservations.nodes}" var="uneReservation" varStatus="status">
-  ${uneReservation.properties.nom.string}&nbsp;  ${uneReservation.properties.prenom.string}&nbsp; ${uneReservation.properties.email.string} places:&nbsp; ${uneReservation.properties.places.string} 
-  <button>Valider</button>
-</br>
+  <tr>
+    <td>
+      ${uneReservation.properties.email.string}
+    </td>  
+    <td>
+      ${uneReservation.properties.nom.string}
+    </td>  
+    <td>
+      ${uneReservation.properties.prenom.string}
+    </td>  
+    <td>
+      ${uneReservation.properties.adresse.string}
+    </td>  
+    <td>
+      ${uneReservation.properties.codePostal.string}
+    </td>  
+    <td>
+      ${uneReservation.properties.ville.string}
+    </td>  
+    <td>
+      ${uneReservation.properties.telephone.string}
+    </td>  
+    <td>
+      ${uneReservation.properties.places.string}
+    </td>  
+    <td>
+      <c:if test="${uneReservation.properties.confirmation.boolean}">
+             confirmé &nbsp;
+        
+      </c:if>            
+      <c:if test="${uneReservation.properties.paye.boolean}">
+             Payé
+      </c:if>            
+    </td>  
+
+    <td>
+      <form action="${url.base}${currentNode.path}.reservationAction.do">
+         <input type="hidden" name="action" value="delete"/>
+         <input type="hidden" name="path" value="${uneReservation.path}"/>
+         <input type="hidden" name="pagePath" value="${currentNode.parent.parent.path}"/>
+         <input class="button" type="submit" value="effacer"/>
+      </form>
+    </td>
+    <td>
+      <form action="${url.base}${currentNode.path}.reservationAction.do">
+         <input type="hidden" name="action" value="paye"/>
+         <input type="hidden" name="path" value="${uneReservation.path}"/>
+         <input type="hidden" name="pagePath" value="${currentNode.parent.parent.path}"/>
+         <input class="button" type="submit" value="Payé"/>
+      </form>
+    </td>
+  </tr> 
 </c:forEach></ul>
+</tbody>
+</table>

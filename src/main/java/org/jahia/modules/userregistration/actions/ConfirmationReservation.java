@@ -20,6 +20,7 @@ import org.jahia.bin.Jahia;
 import org.jahia.bin.Render;
 import org.jahia.services.content.JCRCallback;
 import org.jahia.services.content.JCRNodeWrapper;
+import org.jahia.services.content.JCRPropertyWrapper;
 import org.jahia.services.content.JCRSessionWrapper;
 import org.jahia.services.content.JCRTemplate;
 import org.jahia.services.content.decorator.JCRUserNode;
@@ -51,6 +52,12 @@ public class ConfirmationReservation extends BaseAction {
                     logger.info("send copie to : "+cc);
                     Map<String,Object> bindings = new HashMap<String,Object>();
                     JCRNodeWrapper node = session.getNode("/sites/LARBRE/contents/reservations/"+email+"/"+key);
+                    for (String prop:node.getPropertiesAsString().keySet()) {
+                    	logger.info("propriété :"+prop);
+                    };
+                    JCRPropertyWrapper confirmation=node.getProperty("confirmation");
+                    confirmation.setValue(true);
+                    session.save();
 					bindings.put("reservation", node);
 					NumberFormat formatter = DecimalFormat.getInstance(Locale.FRANCE);
 					formatter.setMinimumFractionDigits(2);

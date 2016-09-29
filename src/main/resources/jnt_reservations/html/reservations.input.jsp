@@ -121,13 +121,13 @@
 					</p>
 					<p>
 						<label class="left" for="places"><fmt:message
-								key="uneReservation.label.places" /></label><input name="places"
+								key="uneReservation.label.places" /></label><input type="number" name="places"
 							id="places" />
 					</p>
 
 					<input type="submit" class="button"
 						value="<fmt:message key='uneReservation.label.form.Validation'/>" />
-                    <INPUT Type="button" VALUE="Annuler" onClick="history.go(-1);return true;">
+                    <INPUT Type="button" class="button" VALUE="Annuler" onClick="history.go(-1);return true;">
 
 				</fieldset>
 			</form>
