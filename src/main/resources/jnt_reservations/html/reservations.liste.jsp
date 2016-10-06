@@ -67,7 +67,7 @@
          <input type="hidden" name="action" value="delete"/>
          <input type="hidden" name="path" value="${uneReservation.path}"/>
          <input type="hidden" name="pagePath" value="${currentNode.parent.parent.path}"/>
-         <input class="button" type="submit" value="effacer"/>
+         <input class="button" type="submit" value="effacer" onclick="if(window.confirm('Voulez-vous vraiment supprimer ?')){return true;}else{return false;}"/>
       </form>
     </td>
     <td>
@@ -75,7 +75,7 @@
          <input type="hidden" name="action" value="paye"/>
          <input type="hidden" name="path" value="${uneReservation.path}"/>
          <input type="hidden" name="pagePath" value="${currentNode.parent.parent.path}"/>
-         <input class="button" type="submit" value="Payé"/>
+         <input class="button" type="submit" value="Payé" onclick="if(window.confirm('Confirmation du paiement ?')){return true;}else{return false;}"/>
       </form>
     </td>
   </tr> 
