@@ -69,7 +69,8 @@ public class ConfirmationReservation extends BaseAction {
 		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"key=add");
                     */
                     try {
-                        mailService.sendMessageWithTemplate(templatePath,bindings,email,from,cc,bcc,resource.getLocale(),"Jahia User Registration");
+                        mailService.sendMessageWithTemplate(templatePath,bindings,email,from,null,bcc,resource.getLocale(),"Jahia User Registration");
+                        mailService.sendMessageWithTemplate("/mails/templates/confirmationReservationCC.vm",bindings,cc,from,null,bcc,resource.getLocale(),"Jahia User Registration");
                     } catch (ScriptException e) {
                         logger.error("Error sending e-mail notification for user confirmation", e);
                     }

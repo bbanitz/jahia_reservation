@@ -1,0 +1,27 @@
+#* @vtlvariable name="newUser" type="org.jahia.services.usermanager.JahiaUser" *#
+#* @vtlvariable name="bundle" type="java.util.ResourceBundle" *#
+#* @vtlvariable name="reservation" type="org.jahia.services.content.JCRNodeWrapper" *#
+#* @vtlvariable name="confirmationlink" type="java.lang.String" *#
+#* @vtlvariable name="total" type="java.lang.String" *#
+<html>
+<body>
+
+La réservation de 
+${reservation.properties.prenom.string} ${reservation.properties.nom.string} a été confirmée
+<br/> 
+
+  <br/>  
+
+
+  <br/>  
+  mail : ${reservation.properties.email.string}
+  <br/>  
+  téléphone : ${reservation.properties.telephone.string}
+<br/><br/>   
+  Nombre de places réservées : ${reservation.properties.places.string}  
+  
+   
+</br></br>
+ 
+</body>
+</html>
