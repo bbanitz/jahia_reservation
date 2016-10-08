@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#* @vtlvariable name="bundle" type="java.util.ResourceBundle" *#
+#* @vtlvariable name="reservation" type="org.jahia.services.content.JCRNodeWrapper" *#
+#* @vtlvariable name="qrcode" type="java.lang.String" *#
+
+
+<html>
+<body>
+
+Bonjour ${reservation.properties.nom.string}
+${reservation.properties.prenom.string}
+  <br/>  
+Nous avons bien reçu votre règlement pour le concert de Sheerdoor
+
+  <br/>  
+  votre mail ${reservation.properties.email.string}
+<br/><br/>   
+  Nombre de places réservées : ${reservation.properties.places.string}
+  ${qrcode}
+  <img src="${qrcode}" />  
+<br/><br/>    
+   Nous vous souhaitons un bon concert
+ </br></br>
+ 
+</body>
+</html>

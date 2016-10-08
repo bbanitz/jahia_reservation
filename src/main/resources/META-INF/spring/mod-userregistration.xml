@@ -7,8 +7,12 @@
         <property name="userManagerService" ref="JahiaUserManagerService"/>
         <property name="mailService" ref="MailService"/>
     </bean>
+
+    <bean class="org.jahia.modules.userregistration.actions.EnregistreBillet">
+        <property name="name" value="enregistreBillet"/>
+    </bean>
     
-    <bean class="org.jahia.modules.userregistration.actions.ReservationAction">
+    <bean class="org.jahia.modules.userregistration.actions.ReservationAction" parent="baseUserregistrationAction">
         <property name="name" value="reservationAction"/>
     </bean>
 

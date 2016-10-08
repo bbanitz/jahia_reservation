@@ -10,14 +10,20 @@
                 <sources jcr:mixinTypes="jmix:hasExternalProviderExtension jmix:sourceControl"
                   jcr:primaryType="jnt:moduleVersionFolder"
                   j:staticMountPointProviderKey="module-userregistration-2.0.5">
+                    <pom.xml jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:xmlFile"/>
                     <src jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
                         <main jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
-                            <java jcr:primaryType="jnt:javaPackageFolder">
-                                <org jcr:primaryType="jnt:javaPackageFolder">
-                                    <jahia jcr:primaryType="jnt:folder">
-                                        <modules jcr:primaryType="jnt:javaPackageFolder">
-                                            <userregistration jcr:primaryType="jnt:javaPackageFolder">
-                                                <actions jcr:primaryType="jnt:javaPackageFolder">
+                            <java jcr:mixinTypes="jmix:sourceControl"
+                        jcr:primaryType="jnt:javaPackageFolder">
+                                <org jcr:mixinTypes="jmix:sourceControl"
+                          jcr:primaryType="jnt:javaPackageFolder">
+                                    <jahia jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                        <modules jcr:mixinTypes="jmix:sourceControl"
+                                    jcr:primaryType="jnt:javaPackageFolder">
+                                            <userregistration jcr:mixinTypes="jmix:sourceControl"
+                                                jcr:primaryType="jnt:javaPackageFolder">
+                                                <actions jcr:mixinTypes="jmix:sourceControl"
+                                          jcr:primaryType="jnt:javaPackageFolder">
                                                     <ConfirmationReservation.java jcr:primaryType="jnt:javaSourceFile"/>
                                                     <NewReservation.java jcr:primaryType="jnt:javaSourceFile"/>
                                                 </actions>
@@ -31,7 +37,7 @@
                                        jcr:primaryType="jnt:nodeTypeFolder">
                                     <html jcr:mixinTypes="jmix:sourceControl"
                               jcr:primaryType="jnt:templateTypeFolder">
-                                        <reservations.input.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
+                                        <reservations.input.jsp jcr:primaryType="jnt:viewFile"/>
                                         <reservations.jsp jcr:primaryType="jnt:viewFile"/>
                                         <reservations.liste.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
                                     </html>
@@ -41,16 +47,18 @@
                                         <uneReservation.jsp jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_uneReservation>
-                                <mails jcr:primaryType="jnt:folder">
-                                    <templates jcr:primaryType="jnt:folder">
+                                <mails jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                    <templates jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                        <confirmationPaye.vm jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:editableFile"/>
                                         <confirmationReservation.vm jcr:primaryType="jnt:editableFile"/>
                                         <newReservation.vm jcr:primaryType="jnt:editableFile"/>
                                     </templates>
                                 </mails>
                                 <META-INF jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:metaInfFolder">
-                                    <definitions.cnd jcr:primaryType="jnt:definitionFile"/>
-                                    <spring jcr:primaryType="jnt:folder">
-                                        <mod-userregistration.xml jcr:primaryType="jnt:xmlFile"/>
+                                    <definitions.cnd jcr:mixinTypes="jmix:sourceControl"
+                                         jcr:primaryType="jnt:definitionFile"/>
+                                    <spring jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                        <mod-userregistration.xml jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:xmlFile"/>
                                     </spring>
                                 </META-INF>
                             </resources>

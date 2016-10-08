@@ -43,6 +43,7 @@
  - modeReglement (string)
  - paye (boolean, text) = 'false' autocreated
  - confirmation (boolean, text) = 'false' autocreated
+ - remiseBillets (boolean, text) = 'false' autocreated
  - places (long)
  - accesKey (string)
  - reservationParent (weakreference)

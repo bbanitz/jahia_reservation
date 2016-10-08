@@ -58,7 +58,10 @@
         
       </c:if>            
       <c:if test="${uneReservation.properties.paye.boolean}">
-             Payé
+             Payé &nbsp;
+      </c:if>            
+      <c:if test="${uneReservation.properties.remiseBillets.boolean}">
+             Remis
       </c:if>            
     </td>  
 
@@ -67,7 +70,7 @@
          <input type="hidden" name="action" value="delete"/>
          <input type="hidden" name="path" value="${uneReservation.path}"/>
          <input type="hidden" name="pagePath" value="${currentNode.parent.parent.path}"/>
-         <input class="button" type="submit" value="effacer" onclick="if(window.confirm('Voulez-vous vraiment supprimer ?')){return true;}else{return false;}"/>
+         <input class="button" type="submit" value="effacer" onclick="if(window.confirm('Voulez-vous vraiment supprimer ${uneReservation.properties.email.string}?')){return true;}else{return false;}"/>
       </form>
     </td>
     <td>
@@ -75,7 +78,7 @@
          <input type="hidden" name="action" value="paye"/>
          <input type="hidden" name="path" value="${uneReservation.path}"/>
          <input type="hidden" name="pagePath" value="${currentNode.parent.parent.path}"/>
-         <input class="button" type="submit" value="Payé" onclick="if(window.confirm('Confirmation du paiement ?')){return true;}else{return false;}"/>
+         <input class="button" type="submit" value="Payé" onclick="if(window.confirm('Confirmation du paiement ${uneReservation.properties.email.string}?')){return true;}else{return false;}"/>
       </form>
     </td>
   </tr> 
