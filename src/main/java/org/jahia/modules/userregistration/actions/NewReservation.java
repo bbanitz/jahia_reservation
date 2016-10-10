@@ -155,9 +155,9 @@ public class NewReservation extends BaseAction {
 		                    + node.getLanguage() + node.getPath() + ".confirmationReservation.do?email="+email+"&key="+key+"&copie="+cc+"&confirmationPage="+ parameters.get("confirmationReservationPage").get(0));
 
 					try {
-						mailService.sendMessageWithTemplate(templatePath, bindings, email, from, null, bcc,
+						mailService.sendMessageWithTemplate(templatePath, bindings, email, "reservations@larbre-bischheim.org", null, bcc,
 								resource.getLocale(), "Jahia User Registration");
-						mailService.sendMessageWithTemplate("/mails/templates/newReservationCC.vm", bindings, cc, from, null, bcc,
+						mailService.sendMessageWithTemplate("/mails/templates/newReservationCC.vm", bindings, cc,"reservations@larbre-bischheim.org", null, bcc,
 								resource.getLocale(), "Jahia User Registration");
 					} catch (ScriptException e) {
 						logger.error("Error sending e-mail notification for user creation", e);

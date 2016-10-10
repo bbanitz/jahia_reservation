@@ -10,6 +10,8 @@ import javax.jcr.RepositoryException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jahia.bin.ActionResult;
+import org.jahia.bin.Jahia;
+import org.jahia.bin.Render;
 import org.jahia.services.content.JCRCallback;
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.JCRPublicationService;
@@ -70,12 +72,15 @@ public class ReservationAction extends BaseAction {
             public Boolean doInJCR(JCRSessionWrapper session) throws RepositoryException {
                 String path = getParameter(parameters, "path");
                 String action = getParameter(parameters, "action");
-                
+                String cc="webmestre@larbre-bischheim.org";
                 JCRNodeWrapper node = session.getNode(path);
                 if (action.equals("delete")) node.remove();
                 if (action.equals("paye")) {
                 	node.getProperty("paye").setValue(true);
-                    String data = "http://192.168.1.250:8080/cms/render/default/fr/sites/LARBRE/liste-reservations/main/reservations.enregistreBillet.do?uuid="+node.getIdentifier();
+                	final JCRNodeWrapper resourceNode = resource.getNode();
+                    String data = req.getScheme() +"://" + req.getServerName() + ":" + req.getServerPort() +
+		                    Jahia.getContextPath() + Render.getRenderServletPath() +"/default/fr"+resourceNode.getPath()+".enregistreBillet.do?uuid="+node.getIdentifier();
+                    logger.info("++++++++++++DATA++++++++++:"+data);
                     int size = 400;
                     BitMatrix bitMatrix = generateMatrix(data, size);
                     String imageFormat = "png";
@@ -86,14 +91,17 @@ public class ReservationAction extends BaseAction {
                     session.save();
                     publication.publishByMainId(qrcodeFolder.getIdentifier());
                     String qrcodePath=qrcode.getAbsoluteUrl(req).replaceFirst("default","live");
+                    String placesStr=(node.getProperty("places").getDouble()>1)?" places":" place";
 					String html="<body>Bonjour "+node.getPropertyAsString("nom")+" "+node.getPropertyAsString("prenom")+
 							"<br/>Email:"+node.getPropertyAsString("email")+
-							"<br/>Nous avons bien reçu votre règlement pour "+node.getPropertyAsString("places")+"places<br/>"+
+							"<br/>Nous avons bien reçu votre règlement pour "+node.getPropertyAsString("places")+placesStr+"<br/>"+
 							"Le présent mail vous servira de billet.<br/> Veuillez le présenter à l'entrée de la salle de concert.<br/>"+
 							"le qr code (l'image ci dessous) doit être apparent<br/><br/>"+
-							"Nous vous souhaitons un bon concert."+
+							"Ce billet ne peut servir qu'une seule fois ne le transmettez donc pas à d'autres personnes<br/>"+
+							"Toutes les personnes doivent se présenter en même temps à l'entrée du spectacle.<br/>"+
+							"Nous vous remercions de votre compréhension et vous souhaitons un bon concert."+
 							"<br><img src=\""+qrcodePath+"\"/></body>";
-					mailService.sendHtmlMessage(null,node.getProperty("email").getString(), null, null,"concert sheerdoor", html);
+					mailService.sendHtmlMessage("reservations@larbre-bischheim.org",node.getProperty("email").getString(), cc, null,"concert sheerdoor", html);
                 }
                 logger.info("action:"+action);
                 session.save();
