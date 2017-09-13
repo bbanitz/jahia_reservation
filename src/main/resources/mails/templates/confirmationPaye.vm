@@ -16,10 +16,12 @@ Nous avons bien reçu votre règlement pour le concert de Sheerdoor
   votre mail ${reservation.properties.email.string}
 <br/><br/>   
   Nombre de places réservées : ${reservation.properties.places.string}
-  ${qrcode}
-  <img src="${qrcode}" />  
+  Vous pourrez retirer vos billets sur place le jour du concert.
+  Prière de vous munir de ce mail pour retirer vos billets
+  Merci  
 <br/><br/>    
    Nous vous souhaitons un bon concert
+   L'arbre.
  </br></br>
  
 </body>

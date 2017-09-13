@@ -94,13 +94,14 @@ public class ReservationAction extends BaseAction {
                     String placesStr=(node.getProperty("places").getDouble()>1)?" places":" place";
 					String html="<body>Bonjour "+node.getPropertyAsString("nom")+" "+node.getPropertyAsString("prenom")+
 							"<br/>Email:"+node.getPropertyAsString("email")+
-							"<br/>Nous avons bien reçu votre règlement pour "+node.getPropertyAsString("places")+placesStr+"<br/>"+
-							"Le présent mail vous servira de billet.<br/> Veuillez le présenter à l'entrée de la salle de concert.<br/>"+
-							"le qr code (l'image ci dessous) doit être apparent<br/><br/>"+
-							"Ce billet ne peut servir qu'une seule fois ne le transmettez donc pas à d'autres personnes<br/>"+
-							"Toutes les personnes doivent se présenter en même temps à l'entrée du spectacle.<br/>"+
-							"Nous vous remercions de votre compréhension et vous souhaitons un bon concert."+
-							"<br><img src=\""+qrcodePath+"\"/></body>";
+							"<br/>Nous avons bien reçu votre règlement pour "+node.getPropertyAsString("places")+placesStr+" pour le concert du groupe Sheerdoor à Bischheim le 29/10/2016 à 21h<br/>"+
+//							"Le présent mail vous servira de billet.<br/> Veuillez le présenter à l'entrée de la salle de concert.<br/>"+
+//							"le qr code (l'image ci dessous) doit être apparent<br/><br/>"+
+//							"Ce billet ne peut servir qu'une seule fois ne le transmettez donc pas à d'autres personnes<br/>"+
+//							"Toutes les personnes doivent se présenter en même temps à l'entrée du spectacle.<br/>"+
+							"Nous vous en remercions et vous souhaitons un bon concert.<br/>Veuillez vous présenter à l'entrée 1/2 heure avant le début du concert avec le présent mail"
+							+"<br><img src=\""+qrcodePath+"\"/></body>";
+                            
 					mailService.sendHtmlMessage("reservations@larbre-bischheim.org",node.getProperty("email").getString(), cc, null,"concert sheerdoor", html);
                 }
                 logger.info("action:"+action);

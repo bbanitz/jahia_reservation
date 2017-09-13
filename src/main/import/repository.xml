@@ -24,10 +24,10 @@
                                                 jcr:primaryType="jnt:javaPackageFolder">
                                                 <actions jcr:mixinTypes="jmix:sourceControl"
                                           jcr:primaryType="jnt:javaPackageFolder">
-                                                    <ConfirmationReservation.java jcr:mixinTypes="jmix:sourceControl"
-                                                                  jcr:primaryType="jnt:javaSourceFile"/>
-                                                    <NewReservation.java jcr:mixinTypes="jmix:sourceControl"
-                                                         jcr:primaryType="jnt:javaSourceFile"/>
+                                                    <ConfirmationReservation.java jcr:primaryType="jnt:javaSourceFile"/>
+                                                    <NewReservation.java jcr:primaryType="jnt:javaSourceFile"/>
+                                                    <ReservationAction.java jcr:mixinTypes="jmix:sourceControl"
+                                                            jcr:primaryType="jnt:javaSourceFile"/>
                                                 </actions>
                                             </userregistration>
                                         </modules>
@@ -41,7 +41,7 @@
                               jcr:primaryType="jnt:templateTypeFolder">
                                         <reservations.input.jsp jcr:primaryType="jnt:viewFile"/>
                                         <reservations.jsp jcr:primaryType="jnt:viewFile"/>
-                                        <reservations.liste.jsp jcr:primaryType="jnt:viewFile"/>
+                                        <reservations.liste.jsp jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_reservations>
                                 <jnt_uneReservation jcr:primaryType="jnt:nodeTypeFolder">
@@ -49,17 +49,17 @@
                                         <uneReservation.jsp jcr:primaryType="jnt:viewFile"/>
                                     </html>
                                 </jnt_uneReservation>
-                                <mails jcr:primaryType="jnt:folder">
-                                    <templates jcr:primaryType="jnt:folder">
-                                        <confirmationPaye.vm jcr:primaryType="jnt:editableFile"/>
-                                        <confirmationReservation.vm jcr:primaryType="jnt:editableFile"/>
+                                <mails jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                    <templates jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                        <confirmationPaye.vm jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:editableFile"/>
+                                        <confirmationReservation.vm jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:editableFile"/>
                                         <newReservation.vm jcr:primaryType="jnt:editableFile"/>
                                     </templates>
                                 </mails>
                                 <META-INF jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:metaInfFolder">
                                     <definitions.cnd jcr:primaryType="jnt:definitionFile"/>
-                                    <spring jcr:primaryType="jnt:folder">
-                                        <mod-userregistration.xml jcr:primaryType="jnt:xmlFile"/>
+                                    <spring jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:folder">
+                                        <mod-userregistration.xml jcr:mixinTypes="jmix:sourceControl" jcr:primaryType="jnt:xmlFile"/>
                                     </spring>
                                 </META-INF>
                             </resources>

@@ -62,7 +62,7 @@ public class ConfirmationReservation extends BaseAction {
 					NumberFormat formatter = DecimalFormat.getInstance(Locale.FRANCE);
 					formatter.setMinimumFractionDigits(2);
 					formatter.setMaximumFractionDigits(2);
-					bindings.put("total",formatter.format(node.getProperty("places").getDouble()*8));
+					bindings.put("total",formatter.format(node.getProperty("places").getDouble()*10));
 					/*
 		            bindings.put("confirmationlink", requ.getScheme() +"://" + requ.getServerName() + ":" + requ.getServerPort() +
 		                    Jahia.getContextPath() + Render.getRenderServletPath() + "/live/"

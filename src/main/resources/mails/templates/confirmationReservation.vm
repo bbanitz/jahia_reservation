@@ -34,14 +34,6 @@ Nous confirmons votre réservation pour le concert de Sheerdoor
   Tél : 06 82 83 56 14
   <br/><br/>
   
-  <p style="font-size:1.5em">Veuillez rappeler votre email sur votre règlement : ${reservation.properties.email.string}
-  <br/>
-  
-  Les chèques doivent être libellés à l'ordre de "l'ARBRE"
-  </p>
-  Nous vous remercions de votre commande
-  
-  
    
 </br></br>
  
